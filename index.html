@@ -4,98 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Creator</title>
+    <title>Code Quiz</title>
+    <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        header,
-        main,
-        footer {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .counter {
-            text-align: right;
-        }
-
-        .alert-outer {
-            z-index: 3;
-            /* width: 100%;*/
-            /* height: 80vh; */
-            border: 1px solid red;
-            background-color: rgba(255, 239, 213, 0.4);
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .single-but,
-        .double-but,
-        .double-but-2 {
-            /* position: absolute; */
-            /* width: 70%; */
-            padding-top: 20px;
-            margin: 0 auto;
-            /* bottom: 25px; */
-        }
-
-        .but-1 {
-            display: block;
-            /* padding: 10px; */
-            color: white;
-            width: 70%;
-            border-radius: 35px;
-            text-align: center;
-            text-decoration: none;
-            margin: 10px auto;
-        }
-
-        .but-1:hover {
-            background-color: rgb(6, 182, 64);
-        }
-
-        h2 {
-            color: navy;
-            text-decoration: underline;
-        }
-
-        #image {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        input {
-            width: 60%;
-        }
-
-        .single-but,
-        .double-but,
-        .double-but-2,
-        .hall-of-fame {
-            display: none;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        #fame-name,
-        #fame-score {
-            list-style-type: none;
-        }
-
-        #fame-name li {
-            color: navy;
-        }
-
-        #fame-score li {
-            color: purple;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -108,11 +21,30 @@
                 <h2 class="title text-center" id="title"></h2>
                 <div class="message">
                     <h4 id="message"></h4>
-                    <p id="instructions" class="text-justify"></p>
+
                 </div>
+                <!-- Initial Screen Pre-Quiz -->
                 <div class="single-but" id="single-but">
+                    <p id="instructions" class="text-justify">
+                        You have 7 minutes to finish a quiz of 14 questions. if you answered a question incorrectly, 30
+                        seconds will be
+                        deducted from the countdown timer at upper right corner of the screen.
+                    <ul class="text-left">
+                        <li> If you got more than 7 questions correct, you will be granted a weighted bonus.</li>
+
+                        <li> Quiz ends when you have answered all the questions or countdown timer reaches zero.</li>
+
+                        <li> After you finish, you can choose to add your name to <strong>Hall of Fame</strong> and/or
+                            re-start the quiz.</li>
+                    </ul>
+                    <em><strong><u> Note:</u></strong> </em>The questions and choices will be shuffled every time you
+                    play.
+                    </p>
                     <a href="#" class="but-1 btn btn-primary btn-lg" id="single">Start</a>
                 </div>
+                <!-- Initial Screen End -->
+
+                <!-- End Screen- After Quiz -->
                 <div class="double-but" id="double-but">
                     <h5>Would you like to add your name to the hall of fame?</h5>
                     <label for="your_name">Name :</label>
@@ -120,6 +52,10 @@
                     <a href="#" class="but-1 btn btn-primary btn-lg" id="double-1">Save</a>
                     <a href="#" class="but-1 btn btn-primary btn-lg" id="double-2">Restart Quiz</a>
                 </div>
+                <!-- End Screen End -->
+
+
+                <!-- Multiple choices -->
                 <div class="double-but-2" id="double-but-2">
                     <a href="#" class="but-1 btn btn-primary btn-lg mx-auto" id="four-1">1</a>
                     <a href="#" class="but-1 btn btn-primary btn-lg" id="four-2">2</a>
@@ -127,11 +63,15 @@
                     <a href="#" class="but-1 btn btn-primary btn-lg" id="four-4">4</a>
 
                 </div>
+                <!-- End of Multiple Choices -->
             </div>
+
             <div class=" col-lg-4 col-md-6 col-sm-12">
+                <!-- Display image -->
                 <div class="row image-holder">
-                    <img src="" alt="" id="image" class="img-fluid rounded mx-auto d-block">
+                    <img src="./images/quiz.png" alt="quiz" id="image" class="img-fluid rounded mx-auto d-block">
                 </div>
+                <!-- Hall of Fame -->
                 <div class="hall-of-fame">
                     <div class="row">
 
@@ -152,6 +92,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- End of Hall of fame -->
             </div>
         </div>
 
@@ -161,6 +102,7 @@
 
 
     <script src="./script.js"></script>
+    <!-- Bootstrap CDN JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
