@@ -1,3 +1,4 @@
+//Initiating variables and calling HTML DOM Elements
 const title = document.querySelector("#title")
 const message = document.querySelector("#message")
 const single = document.querySelector("#single")
@@ -9,7 +10,6 @@ const four_2 = document.querySelector("#four-2")
 const four_3 = document.querySelector("#four-3")
 const four_4 = document.querySelector("#four-4")
 const image = document.querySelector("#image")
-// const instructions = document.querySelector("#instructions")
 const double_1 = document.querySelector("#double-1")
 const double_2 = document.querySelector("#double-2")
 const fame_name = document.querySelector("#fame-name")
@@ -22,6 +22,9 @@ let score = 0
 let weighted_score = 0
 let count = 420
 var shuffeled_questions;
+
+//Questions to be used in the Quiz are composed of an array of objects, Questions are shuffled every 
+// new Quiz run and answers are shuffled everytime a new question is displayed on screen
 
 const questions2 = [
     {
@@ -93,12 +96,103 @@ const questions2 = [
         answer: "<thead>"
     }]
 
-//First Run
+//Initiate Introductory Screen
 title.textContent = "Code Quiz"
 message.textContent = "Instructions"
 
 single_but.style.display = "block"
 single.addEventListener('click', start_quiz)
+
+double_1.addEventListener('click', fame_adder)
+double_2.addEventListener('click', start_quiz)
+
+//Start Quiz
+function start_quiz() {
+    iterator = 0
+    score = 0
+    count = 420
+    shuffeled_questions = questions2.sort(() => { return .5 - Math.random() })
+    document.querySelector(".image-holder").style.display = "block"
+    image.style.display = "block"
+    single_but.style.display = "none"
+    double_but.style.display = "none"
+    image.src = "./images/ready.png"
+    document.querySelector(".hall-of-fame").style.display = "none"
+    generateQuestion(iterator)
+    start_count()
+    setTimeout(() => document.addEventListener('click', displayer), 1) //Delay Event Listener 1msec so as not to confuse with eventlistener from the previous screen
+
+}
+//Counter at top right during the quiz
+function start_count() {
+
+    const counter = document.querySelector("#counter")
+    timer = setInterval(() => {
+        var minutes, sec
+        if (count <= 0) {
+            count = 0
+            endQuiz()
+            clearInterval(timer)
+        } else {
+            count--
+            (count % 60 < 10) ? sec = "0" + count % 60 : sec = "" + count % 60
+            Math.floor(count / 60) < 10 ? minutes = "0" + Math.floor(count / 60) : minutes = Math.floor(count / 60)
+            counter.textContent = "Time Remaining " + minutes + ":" + sec
+        }
+    }, 1000)
+}
+
+
+//Generate a new Question
+function generateQuestion(iterator) {
+    double_but_2.style.display = "block"
+    title.textContent = "Question " + (iterator + 1)
+    message.textContent = shuffeled_questions[iterator].question
+    let shuffled_options = shuffeled_questions[iterator].options.sort(() => { return .5 - Math.random() })
+    four_1.textContent = shuffled_options[0]
+    four_2.textContent = shuffled_options[1]
+    four_3.textContent = shuffled_options[2]
+    four_4.textContent = shuffled_options[3]
+}
+//Check user's answer and generate a new question or end the Quiz
+function displayer(e) {
+    if (e.target.matches(".but-1")) { //Check if answer is correct
+        if (shuffeled_questions[iterator].answer === e.target.textContent) {
+            answerVerifier("correct")
+            score++
+        } else {
+            answerVerifier("wrong")
+            count = count - 30
+        }
+        if (iterator + 1 < shuffeled_questions.length) {//Display a new Question if there are more yet to be answered
+
+            generateQuestion(++iterator)
+        }
+        else {
+            endQuiz()//End Quiz if the user reached last Questions before time is over
+        }
+    }
+}
+// Display a tick or cross depending on user's answer
+function answerVerifier(answerStatus) {
+    setTimeout(() => image.src = "./images/ready.png", 1500)
+    image.src = "./images/" + answerStatus + ".png"
+}
+
+
+//End of Quiz
+function endQuiz() {
+    title.textContent = "End of Quiz"
+    //Generate a wheighted score bonus if the user solved 7+ questions correctly
+    weighted_score = (score > 7 ? score + (count > 0 ? (count / 30) : 0) : score).toFixed(2)
+    message.textContent = "Your score is : " + weighted_score
+    double_but_2.style.display = "none"
+    image.src = ""//Stop displaying any image as "Hall of Fame will take place instead"
+    after_quiz()
+    document.removeEventListener('click', displayer) // that's to avoid errors when clicking any buttons other than the multiple chice during the quiz
+    clearInterval(timer) //Stop thr timer.
+
+}
 
 //After Quiz
 function after_quiz() {
@@ -108,9 +202,9 @@ function after_quiz() {
     double_1.style.display = "inline-block"
     double_1.setAttribute("style", "display:inline-block; margin-right:20px; width:40%")
     double_2.setAttribute("style", "display:inline-block;width:40%")
-    double_1.addEventListener('click', fame_adder)
-    double_2.addEventListener('click', start_quiz)
+
 }
+
 //Add names to Hall of fame
 function fame_adder() {
     fame.push({ name: player_name.value, score: weighted_score });
@@ -120,106 +214,10 @@ function fame_adder() {
     li_score.textContent = weighted_score
     fame_name.appendChild(li_name)
     fame_score.appendChild(li_score)
-    double_1.style.display = "none"
-    setTimeout(double_1.removeEventListener('click', fame_adder), 1)
-}
-
-function answerVerifier(answerStatus) {
-    setTimeout(() => image.src = "./images/ready.png", 1500)
-    image.src = "./images/" + answerStatus + ".png"
-}
-
-
-
-function displayer(e) {
-
-    if (e.target.matches(".but-1")) {
-        if (shuffeled_questions[iterator].answer === e.target.textContent) {
-            answerVerifier("correct")
-            score++
-        } else {
-            answerVerifier("wrong")
-            count = count - 30
-        }
-        if (iterator + 1 < shuffeled_questions.length) {
-
-            generateQuestion(++iterator)
-        }
-        else {
-            endQuiz()
-        }
-    }
-
-}
-
-function generateQuestion(iterator) {
-    console.log("function " + iterator)
-
-    double_but_2.style.display = "block"
-
-
-    title.textContent = "Question " + (iterator + 1)
-    message.textContent = shuffeled_questions[iterator].question
-    let shuffled_options = shuffeled_questions[iterator].options.sort(() => { return .5 - Math.random() })
-    four_1.textContent = shuffled_options[0]
-    four_2.textContent = shuffled_options[1]
-    four_3.textContent = shuffled_options[2]
-    four_4.textContent = shuffled_options[3]
-
-
-}
-
-function endQuiz() {
-    counter.textContent = "Time Remaining  00:00"
-    title.textContent = "End of Quiz"
-    console.log(score + count / 30)
-    weighted_score = (score > 7 ? score + (count > 0 ? (count / 30) : 0) : score).toFixed(2)
-    message.textContent = "Your score is : " + weighted_score
-    double_but_2.style.display = "none"
-    image.src = ""
-    after_quiz()
-    document.removeEventListener('click', displayer)
-
+    double_1.style.display = "none" // User is allowed to add their names only once everytime they run the quiz
 }
 
 
 
 
 
-function start_count() {
-
-    const counter = document.querySelector("#counter")
-    const timer = setInterval(() => {
-        var minutes, sec
-        if (count <= 0) {
-            endQuiz()
-            clearInterval(timer)
-        } else {
-            (count % 60 < 10) ? sec = "0" + count % 60 : sec = "" + count % 60
-            Math.floor(count / 60) < 10 ? minutes = "0" + Math.floor(count / 60) : minutes = Math.floor(count / 60)
-            count--
-            counter.textContent = "Time Remaining " + minutes + ":" + sec
-            title.textContent === "End of Quiz" ? clearInterval(timer) : timer
-
-        }
-    }, 1000)
-}
-function start_quiz() {
-    iterator = 0
-    score = 0
-    count = 420
-    shuffeled_questions = questions2.sort(() => { return .5 - Math.random() })
-
-    document.querySelector(".image-holder").style.display = "block"
-    image.style.display = "block"
-    single_but.style.display = "none"
-    double_but.style.display = "none"
-    image.src = "./images/ready.png"
-    document.querySelector(".hall-of-fame").style.display = "none"
-    single.removeEventListener('click', start_quiz)
-    double_1.removeEventListener('click', fame_adder)
-    generateQuestion(iterator)
-    start_count()
-    setTimeout(() => document.addEventListener('click', displayer), 1) //Delay Event Listener 1msec so as not to confuse with eventlistener from the previous screen
-
-}

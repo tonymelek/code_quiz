@@ -79,3 +79,7 @@ input {
 #fame-score li {
     color: purple;
 }
+footer{
+    width: 100%;
+    text-align: center;
+}
