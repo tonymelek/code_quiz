@@ -1,0 +1,15 @@
+﻿Question,Option1,Option2,Option3,Option4,Answer
+You can use any of the following as code editor except :,Sublime,Visual studio code,Photoshop,Atom,Photoshop
+You can use any of the following as a web browser except :,Opera,Safari,Chrome,Notepad,Notepad
+The following HTML tags are used in the body except :,title,h1,main,header,title
+Latest version of HTML which is being used  :,3.1,4.6,5,6.1,5
+Which web technology is used for styling elements?,CSS,HTML,Javascript,Python,CSS
+Default display setting of a <div> is,block,inline-block,inline,none,block
+The following are considered semantic tags except:,main,nav,aside,div,div
+Default display setting of a <p> is,block,inline-block,inline,none,block
+Default display setting of a <span> is,block,inline-block,inline,none,inline
+Largest Heading tag is,h1,h5,h4,h6,h1
+To insert line break in HTML,<br>,<span>,<break>,<lb>,<br>
+To make text italic use which of these tags,<em>,<i>,<italic>,<style-italic>,<em>
+How can you open a link in a new tab/browser window?,target=blank,target=new,target=_blank,target=_new,target=_blank
+All of the following are table tags except,<th>,<thead>,<tbody>,<tr>,<thead>
