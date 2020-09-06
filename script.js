@@ -2,14 +2,14 @@
 $.get('test.csv', function (data) {
     const new_data = [...data] //Covert string to array
     const new_array = []
-    let index = 0
+    // let index = 0
     for (let i = 0; i < data.length; i++) { //Loop through the array and convert Enter and empty sting charcters to *
         new_data[i].charCodeAt() === 10 || new_data[i].charCodeAt() === 13 ? new_data[i] = '*' : new_data
     }
     const temp = new_data.join('').split('*') //convert arrayto string and remove *
-    for (let i = 0; i < temp.length - 1; i += 2) {
-        new_array[index] = ([...temp[i]].join('').split(',')) //create a two dimensional array
-        index++
+    for (let i = 0; i < temp.length - 1; i++) {
+        new_array[i] = ([...temp[i]].join('').split(',')) //create a two dimensional array
+
     }
     //Conert the two dimensional array into Object
     const questions = [];
@@ -21,7 +21,7 @@ $.get('test.csv', function (data) {
         }
     }
 
-
+    console.log(questions)
 
     //Initiating variables and calling HTML DOM Elements
     const title = document.querySelector("#title")
