@@ -1,6 +1,10 @@
 # Code Quiz
 ## Description
-This a simple Begiiner Level HTML Quiz. The Quiz starts with an introductory screen giving the user intructions and waits till they are ready to run the quiz, then quiz runs , then an End of Quiz screen
+This a simple Begiiner Level HTML Quiz. The Quiz starts with an introductory screen giving the user intructions and waits till they are ready to run the quiz, then quiz runs , then an End of Quiz screen.
+
+* The Quiz Questions and answer options are read from a CSV file, which can be edited away from the code, just sticking to its current format.
+
+* Questions are shuffled every time the quiz is run, and multiple choice options are shuffled as well.
 
 
 
