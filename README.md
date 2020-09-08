@@ -1,6 +1,6 @@
 # Code Quiz
 ## Description
-This a simple Begiiner Level HTML Quiz. The Quiz starts with an introductory screen giving the user intructions and waits till they are ready to run the quiz, then quiz runs , then an End of Quiz screen.
+This a simple Beginner Level HTML Quiz. The Quiz starts with an introductory screen giving the user intructions and waits till they are ready to run the quiz, then quiz runs , then an End of Quiz screen.
 
 * The Quiz Questions and answer options are read from a CSV file, which can be edited away from the code, just sticking to its current format.
 
@@ -14,7 +14,7 @@ This a simple Begiiner Level HTML Quiz. The Quiz starts with an introductory scr
 * Once, the quiz starts the user will see a counter running at the top right corner of the screen and will get the first question. 
 ![Questions_screen](./images/questions.jpg)
 * Everytime the user answers a question , they will be told if they answred correctly or not. If not 30 seconds will be deducted from the timer.
-* If the user solved 7+ questions correctly, they eill be granted a weighted bonus depending on the remaining time after they finish. (So, you need to answer correctly and quickly to get the highest score).
+* If the user solved more than half the questions correctly, they will be granted a weighted bonus depending on the remaining time after they finish. (So, you need to answer correctly and quickly to get the highest score).
 * Quiz ends whenever any of these happens first ( Times runs out, Questions run out).
 ![End_screen](./images/end.jpg)
 * User is offered to add their name to the "Hall of Fame" everytime they have completed the Quiz.
