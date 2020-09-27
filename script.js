@@ -14,12 +14,12 @@ $.get('test.csv', function (data) {
     //Conert the two dimensional array into Object
     const questions = [];
     new_array = new_array.slice(1)
-    for (let i = 1; i < new_array.length; i += 2) {
-        questions.push({
+    for (let i = 1; i < new_array.length; i++) {
+        new_array[i][0] !== '' ? questions.push({
             question: new_array[i][0],
             options: new_array[i].slice(1, 5),
             answer: new_array[i][5]
-        })
+        }) : i
     }
 
     console.log(questions)
