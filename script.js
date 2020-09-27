@@ -1,7 +1,7 @@
 //Read Questions from CSV file
 $.get('test.csv', function (data) {
     const new_data = [...data] //Covert string to array
-    const new_array = []
+    let new_array = []
     // let index = 0
     for (let i = 0; i < data.length; i++) { //Loop through the array and convert Enter and empty sting charcters to *
         new_data[i].charCodeAt() === 10 || new_data[i].charCodeAt() === 13 ? new_data[i] = '*' : new_data
@@ -13,12 +13,13 @@ $.get('test.csv', function (data) {
     }
     //Conert the two dimensional array into Object
     const questions = [];
-    for (let i = 1; i < new_array.length; i++) {
-        questions[i - 1] = {
+    new_array = new_array.slice(1)
+    for (let i = 1; i < new_array.length; i += 2) {
+        questions.push({
             question: new_array[i][0],
             options: new_array[i].slice(1, 5),
             answer: new_array[i][5]
-        }
+        })
     }
 
     console.log(questions)
@@ -94,6 +95,7 @@ $.get('test.csv', function (data) {
                 count = 0
                 endQuiz()
                 clearInterval(timer)
+                timer = null
             } else {
                 count--
                 (count % 60 < 10) ? sec = "0" + count % 60 : sec = "" + count % 60
@@ -152,6 +154,7 @@ $.get('test.csv', function (data) {
         after_quiz()
         document.removeEventListener('click', displayer) // that's to avoid errors when clicking any buttons other than the multiple chice during the quiz
         clearInterval(timer) //Stop thr timer.
+        timer = null
 
     }
 
