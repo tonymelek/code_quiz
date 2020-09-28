@@ -1,7 +1,7 @@
 //Read Questions from CSV file
 $.get('test.csv', function (data) {
     const new_data = [...data] //Covert string to array
-    let new_array = []
+    const new_array = []
     // let index = 0
     for (let i = 0; i < data.length; i++) { //Loop through the array and convert Enter and empty sting charcters to *
         new_data[i].charCodeAt() === 10 || new_data[i].charCodeAt() === 13 ? new_data[i] = '*' : new_data
@@ -13,7 +13,7 @@ $.get('test.csv', function (data) {
     }
     //Conert the two dimensional array into Object
     const questions = [];
-    new_array = new_array.slice(1)
+    //index 0 is the headersin the csv, so start loop from index 1
     for (let i = 1; i < new_array.length; i++) {
         new_array[i][0] !== '' ? questions.push({
             question: new_array[i][0],
